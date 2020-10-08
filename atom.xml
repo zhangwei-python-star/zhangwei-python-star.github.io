@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Wei leo Zhang</title>
+  
+  
+  <link href="https://zhangwei-python-star.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://zhangwei-python-star.github.io/"/>
+  <updated>2020-10-07T15:22:15.417Z</updated>
+  <id>https://zhangwei-python-star.github.io/</id>
+  
+  <author>
+    <name>Zhangwei</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>BBS项目1</title>
+    <link href="https://zhangwei-python-star.github.io/2020/10/07/72day/"/>
+    <id>https://zhangwei-python-star.github.io/2020/10/07/72day/</id>
+    <published>2020-10-07T15:22:15.417Z</published>
+    <updated>2020-10-07T15:22:15.417Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;数据库表创建及同步&quot;&gt;&lt;a href=&quot;#数据库表创建及同步&quot; class=&quot;headerlink&quot; title=&quot;数据库表创建及同步&quot;&gt;&lt;/a&gt;数据库表创建及同步&lt;/h3&gt;&lt;figure class=&quot;highlight</summary>
+        
+      
+    
+    
+    
+    <category term="---python" scheme="https://zhangwei-python-star.github.io/categories/python/"/>
+    
+    
+    <category term="bbs" scheme="https://zhangwei-python-star.github.io/tags/bbs/"/>
+    
+    <category term="全栈开发，python" scheme="https://zhangwei-python-star.github.io/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91%EF%BC%8Cpython/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BBS项目2</title>
+    <link href="https://zhangwei-python-star.github.io/2020/10/07/73day/"/>
+    <id>https://zhangwei-python-star.github.io/2020/10/07/73day/</id>
+    <published>2020-10-07T15:22:13.297Z</published>
+    <updated>2020-10-07T15:22:13.297Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;今日内容概要&quot;&gt;&lt;a href=&quot;#今日内容概要&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="---python" scheme="https://zhangwei-python-star.github.io/categories/python/"/>
+    
+    
+    <category term="bbs" scheme="https://zhangwei-python-star.github.io/tags/bbs/"/>
+    
+    <category term="全栈开发" scheme="https://zhangwei-python-star.github.io/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="python" scheme="https://zhangwei-python-star.github.io/tags/python/"/>
+    
+  </entry>
+  
+</feed>
