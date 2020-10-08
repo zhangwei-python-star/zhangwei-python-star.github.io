@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    BBS项目3 |  
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="Wei leo Zhang" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-74day"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  BBS项目3
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/10/08/74day/" class="article-date">
+  <time datetime="2020-10-08T03:08:20.940Z" itemprop="datePublished">2020-10-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">---python</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="文章详情页"><a href="#文章详情页" class="headerlink" title="文章详情页"></a>文章详情页</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># url设计</span></span><br><span class="line">/username/article/<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 先验证url是否会被其他url顶替</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文章详情页和个人站点基本一致 所以用模版继承</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 侧边栏的渲染需要传输数据才能渲染 并且该侧边栏在很多页面都需要使用</span></span><br><span class="line">	<span class="number">1.</span>哪个地方用就拷贝需要的代码(不推荐 有点繁琐)</span><br><span class="line">  </span><br><span class="line">  <span class="number">2.</span>将侧边栏制作成inclusion_tag	</span><br><span class="line">  <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">  步骤</span></span><br><span class="line"><span class="string">  	1.在应用下创建一个名字必须叫templatetags文件夹</span></span><br><span class="line"><span class="string">  	2.在该文件夹内创建一个任意名称的py文件</span></span><br><span class="line"><span class="string">  	3.在该py文件内先固定写两行代码</span></span><br><span class="line"><span class="string">  		from django import template</span></span><br><span class="line"><span class="string">  		register = template.Library()</span></span><br><span class="line"><span class="string">  		# 自定义过滤器</span></span><br><span class="line"><span class="string">  		# 自定义标签</span></span><br><span class="line"><span class="string">  		# 自定义inclusion_tag</span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  <span class="comment"># 自定义inclusion_tag</span></span><br><span class="line"><span class="meta">@register.inclusion_tag(&#x27;left_menu.html&#x27;)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">left_menu</span>(<span class="params">username</span>):</span></span><br><span class="line">    <span class="comment"># 构造侧边栏需要的数据</span></span><br><span class="line">    user_obj = models.UserInfo.objects.filter(username=username).first()</span><br><span class="line">    blog = user_obj.blog</span><br><span class="line">    <span class="comment"># 1 查询当前用户所有的分类及分类下的文章数</span></span><br><span class="line">    category_list = models.Category.objects.filter(blog=blog).annotate(count_num=Count(<span class="string">&#x27;article__pk&#x27;</span>)).values_list(</span><br><span class="line">        <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;count_num&#x27;</span>, <span class="string">&#x27;pk&#x27;</span>)</span><br><span class="line">    <span class="comment"># print(category_list)  # &lt;QuerySet [(&#x27;jason的分类一&#x27;, 2), (&#x27;jason的分类二&#x27;, 1), (&#x27;jason的分类三&#x27;, 1)]&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 2 查询当前用户所有的标签及标签下的文章数</span></span><br><span class="line">    tag_list = models.Tag.objects.filter(blog=blog).annotate(count_num=Count(<span class="string">&#x27;article__pk&#x27;</span>)).values_list(<span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">                                                                                                         <span class="string">&#x27;count_num&#x27;</span>,</span><br><span class="line">                                                                                                         <span class="string">&#x27;pk&#x27;</span>)</span><br><span class="line">    <span class="comment"># print(tag_list)  # &lt;QuerySet [(&#x27;tank的标签一&#x27;, 1), (&#x27;tank的标签二&#x27;, 1), (&#x27;tank的标签三&#x27;, 2)]&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3 按照年月统计所有的文章</span></span><br><span class="line">    date_list = models.Article.objects.filter(blog=blog).annotate(month=TruncMonth(<span class="string">&#x27;create_time&#x27;</span>)).values(</span><br><span class="line">        <span class="string">&#x27;month&#x27;</span>).annotate(count_num=Count(<span class="string">&#x27;pk&#x27;</span>)).values_list(<span class="string">&#x27;month&#x27;</span>, <span class="string">&#x27;count_num&#x27;</span>)</span><br><span class="line">    <span class="comment"># print(date_list)</span></span><br><span class="line">    <span class="keyword">return</span> locals()</span><br></pre></td></tr></table></figure>
+
+<h3 id="文章点赞点踩"><a href="#文章点赞点踩" class="headerlink" title="文章点赞点踩"></a>文章点赞点踩</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">浏览器上你看到的花里胡哨的页面，内部都是HTML(前端)代码</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">那现在我们的文章内容应该写什么？？？	&gt;&gt;&gt; html代码</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">如何拷贝文章</span></span><br><span class="line"><span class="string">	copy outerhtml</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">1.拷贝文章</span></span><br><span class="line"><span class="string">2.拷贝点赞点踩</span></span><br><span class="line"><span class="string">	1.拷贝前端点赞点踩图标 只拷了html</span></span><br><span class="line"><span class="string">	2.css也要拷贝</span></span><br><span class="line"><span class="string">		由于有图片防盗链的问题 所以将图片直接下载到本地</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">课下思考:</span></span><br><span class="line"><span class="string">	前端如何区分用户是点了赞还是点了踩</span></span><br><span class="line"><span class="string">	1.给标签各自绑定一个事件</span></span><br><span class="line"><span class="string">		两个标签对应的代码其实基本一样，仅仅是是否点赞点踩这一个参数不一样而已</span></span><br><span class="line"><span class="string">	2.二合一</span></span><br><span class="line"><span class="string">		给两个标签绑定一个事件</span></span><br><span class="line"><span class="string">		//   给所有的action类绑定事件</span></span><br><span class="line"><span class="string">  	$(&#x27;.action&#x27;).click(function () &#123;</span></span><br><span class="line"><span class="string">            alert($(this).hasClass(&#x27;diggit&#x27;))</span></span><br><span class="line"><span class="string">        &#125;)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">由于点赞点踩内部有一定的业务逻辑，所以后端单独开设视图函数处理</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 个人建议:写代码先把所有正确的逻辑写完再去考虑错误的逻辑 不要试图两者兼得</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> django.db.models <span class="keyword">import</span> F</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">up_or_down</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    1.校验用户是否登陆</span></span><br><span class="line"><span class="string">    2.判断当前文章是否是当前用户自己写的(自己不能点自己的文章)</span></span><br><span class="line"><span class="string">    3.当前用户是否已经给当前文章点过了</span></span><br><span class="line"><span class="string">    4.操作数据库了</span></span><br><span class="line"><span class="string">    :param request:</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> request.is_ajax():</span><br><span class="line">        back_dic = &#123;<span class="string">&#x27;code&#x27;</span>:<span class="number">1000</span>,<span class="string">&#x27;msg&#x27;</span>:<span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">        <span class="comment"># 1 先判断当前用户是否登陆</span></span><br><span class="line">        <span class="keyword">if</span> request.user.is_authenticated():</span><br><span class="line">            article_id = request.POST.get(<span class="string">&#x27;article_id&#x27;</span>)</span><br><span class="line">            is_up = request.POST.get(<span class="string">&#x27;is_up&#x27;</span>)</span><br><span class="line">            <span class="comment"># print(is_up,type(is_up))  # true &lt;class &#x27;str&#x27;&gt;</span></span><br><span class="line">            is_up = json.loads(is_up)  <span class="comment"># 记得转换</span></span><br><span class="line">            <span class="comment"># print(is_up, type(is_up))  # True &lt;class &#x27;bool&#x27;&gt;</span></span><br><span class="line">            <span class="comment"># 2 判断当前文章是否是当前用户自己写的  根据文章id查询文章对象 根据文章对象查作者 根request.user比对</span></span><br><span class="line">            article_obj = models.Article.objects.filter(pk=article_id).first()</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> article_obj.blog.userinfo == request.user:</span><br><span class="line">                <span class="comment"># 3 校验当前用户是否已经点了      哪个地方记录了用户到底点没点</span></span><br><span class="line">                is_click = models.UpAndDown.objects.filter(user=request.user,article=article_obj)</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> is_click:</span><br><span class="line">                    <span class="comment"># 4 操作数据库 记录数据      要同步操作普通字段</span></span><br><span class="line">                    <span class="comment"># 判断当前用户点了赞还是踩 从而决定给哪个字段加一</span></span><br><span class="line">                    <span class="keyword">if</span> is_up:</span><br><span class="line">                        <span class="comment"># 给点赞数加一</span></span><br><span class="line">                        models.Article.objects.filter(pk=article_id).update(up_num = F(<span class="string">&#x27;up_num&#x27;</span>) + <span class="number">1</span>)</span><br><span class="line">                        back_dic[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;点赞成功&#x27;</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        <span class="comment"># 给点踩数加一</span></span><br><span class="line">                        models.Article.objects.filter(pk=article_id).update(down_num=F(<span class="string">&#x27;down_num&#x27;</span>) + <span class="number">1</span>)</span><br><span class="line">                        back_dic[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;点踩成功&#x27;</span></span><br><span class="line">                    <span class="comment"># 操作点赞点踩表</span></span><br><span class="line">                    models.UpAndDown.objects.create(user=request.user,article=article_obj,is_up=is_up)</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    back_dic[<span class="string">&#x27;code&#x27;</span>] = <span class="number">1001</span></span><br><span class="line">                    back_dic[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;你已经点过了,不能再点了&#x27;</span>  <span class="comment"># 这里你可以做的更加的详细 提示用户到底点了赞还是点了踩</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                back_dic[<span class="string">&#x27;code&#x27;</span>] = <span class="number">1002</span></span><br><span class="line">                back_dic[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;你个臭不要脸的!&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            back_dic[<span class="string">&#x27;code&#x27;</span>] = <span class="number">1003</span></span><br><span class="line">            back_dic[<span class="string">&#x27;msg&#x27;</span>] = <span class="string">&#x27;请先&lt;a href=&quot;/login/&quot;&gt;登陆&lt;/a&gt;&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> JsonResponse(back_dic)</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">        //   给所有的action类绑定事件</span><br><span class="line">        $(<span class="string">&#x27;.action&#x27;</span>).click(function () &#123;</span><br><span class="line">            &#123;<span class="comment">#alert($(this).hasClass(&#x27;diggit&#x27;))#&#125;</span></span><br><span class="line">            let isUp = $(this).hasClass(<span class="string">&#x27;diggit&#x27;</span>);</span><br><span class="line">            let $div = $(this);</span><br><span class="line">            // 朝后端发送ajax请求</span><br><span class="line">            $.ajax(&#123;</span><br><span class="line">                url:<span class="string">&#x27;/up_or_down/&#x27;</span>,</span><br><span class="line">                type:<span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">                data:&#123;</span><br><span class="line">                    <span class="string">&#x27;article_id&#x27;</span>:<span class="string">&#x27;&#123;&#123; article_obj.pk &#125;&#125;&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;is_up&#x27;</span>:isUp,</span><br><span class="line">                    <span class="string">&#x27;csrfmiddlewaretoken&#x27;</span>:<span class="string">&#x27;&#123;&#123; csrf_token &#125;&#125;&#x27;</span></span><br><span class="line">                &#125;,</span><br><span class="line">                success:function (args) &#123;</span><br><span class="line">                        <span class="keyword">if</span>(args.code == <span class="number">1000</span>)&#123;</span><br><span class="line">                            $(<span class="string">&#x27;#digg_tips&#x27;</span>).text(args.msg)</span><br><span class="line">                            // 将前端的数字加一</span><br><span class="line">                            // 先获取到之前的数字</span><br><span class="line">                            let oldNum = $div.children().text();  // 文本 是字符类型</span><br><span class="line">                            // 易错点</span><br><span class="line">                            $div.children().text(Number(oldNum) + <span class="number">1</span>)  // 字符串拼接了 <span class="number">1</span>+<span class="number">1</span> = <span class="number">11</span>  <span class="number">11</span> + <span class="number">1</span> = <span class="number">111</span></span><br><span class="line">                        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                            $(<span class="string">&#x27;#digg_tips&#x27;</span>).html(args.msg)</span><br><span class="line">                        &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">    &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="文章评论"><a href="#文章评论" class="headerlink" title="文章评论"></a>文章评论</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">我们先写根评论</span></span><br><span class="line"><span class="string">再写子评论</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">点击评论按钮需要将评论框里面的内容清空</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">根评论有两步渲染方式</span></span><br><span class="line"><span class="string">	1.DOM临时渲染</span></span><br><span class="line"><span class="string">	2.页面刷新render渲染</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">子评论</span></span><br><span class="line"><span class="string">	点击回复按钮发生了几件事</span></span><br><span class="line"><span class="string">		1.评论框自动聚焦</span></span><br><span class="line"><span class="string">		2.将回复按钮所在的那一行评论人的姓名</span></span><br><span class="line"><span class="string">			@username</span></span><br><span class="line"><span class="string">		3.评论框内部自动换行</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">根评论子评论都是点击一个按钮朝后端提交数据的</span></span><br><span class="line"><span class="string">	parent_id</span></span><br><span class="line"><span class="string">根评论子评论区别在哪？</span></span><br><span class="line"><span class="string">	parent_id</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://zhangwei-python-star.github.io/2020/10/08/74day/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bbs/" rel="tag">bbs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" rel="tag">全栈开发</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2020/10/07/72day/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">BBS项目1</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "sHov6LtH7uqn7BConatx8lLJ-gzGzoHsz",
+    app_key: "m5TO4CeAt5zGdX7XaWrntgA5",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> Zhangwei
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/zw.jpg" alt="Wei leo Zhang"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/null">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+
+<script src="/js/clickLove.js"></script>
+
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=169311&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+</body>
+
+</html>

@@ -6,7 +6,7 @@
   <link href="https://zhangwei-python-star.github.io/atom.xml" rel="self"/>
   
   <link href="https://zhangwei-python-star.github.io/"/>
-  <updated>2020-10-07T15:22:15.417Z</updated>
+  <updated>2020-10-08T03:08:20.940Z</updated>
   <id>https://zhangwei-python-star.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>BBS项目3</title>
+    <link href="https://zhangwei-python-star.github.io/2020/10/08/74day/"/>
+    <id>https://zhangwei-python-star.github.io/2020/10/08/74day/</id>
+    <published>2020-10-08T03:08:20.940Z</published>
+    <updated>2020-10-08T03:08:20.940Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;文章详情页&quot;&gt;&lt;a href=&quot;#文章详情页&quot; class=&quot;headerlink&quot; title=&quot;文章详情页&quot;&gt;&lt;/a&gt;文章详情页&lt;/h3&gt;&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    <category term="---python" scheme="https://zhangwei-python-star.github.io/categories/python/"/>
+    
+    
+    <category term="bbs" scheme="https://zhangwei-python-star.github.io/tags/bbs/"/>
+    
+    <category term="全栈开发" scheme="https://zhangwei-python-star.github.io/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="python" scheme="https://zhangwei-python-star.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>BBS项目1</title>
